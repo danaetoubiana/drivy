@@ -2,6 +2,7 @@
 
 //list of cars
 //useful for ALL exercises
+
 var cars = [{
   'id': 'p306',
   'vehicule': 'peugeot 306',
@@ -165,7 +166,8 @@ var rentalModifications = [{
   'pickupDate': '2015-12-05'
 }];
 
+
 console.log(cars);
 console.log(rentals);
 console.log(actors);
-console.log(rentalModifications);
+//console.log(rentalModifications);
