@@ -82,6 +82,33 @@ var rentals = [{
   }
 }];
 
+
+
+function Update ()
+{
+ for ( var i = 0 ; i < rentals.length ; i++)
+	{
+	var day = new Date();
+	var id = rentals[i].carId;
+	var distance = rentals[i].distance;
+	var returnDate = new Date (rentals[i].returnDate);
+	var beginingDate = new Date(rentals[i].pickupDate);
+	var priceDay;
+	var priceKm = 0;
+
+			for ( var j =0; j < cars.length ; j++)
+			{
+				if ( cars[j].id == id )
+				{
+					   priceDay = cars[j].pricePerDay;
+					   priceKm = cars[j].pricePerKm;
+				}
+			}
+		day = 1+ (returnDate - beginingDate )/(24*3600*1000) ;
+		rentals[i].price = distance * priceKm + day * priceDay ;
+	}
+}
+/* Fonction test avec un forEach
 function getPrice()
 {
   rentals.forEach{
@@ -98,16 +125,17 @@ function getPrice()
             {
               newpriceperday = EachCars.pricePerDay*0.90;
             }
-*/
+
             var kilometers = EachRentals.distance+EachCars.pricePerKm;
             EachRentals.price = time * newpriceperday +kilometers;
           }
         }
       }
     }
+  }
+}
+*/
 
-}
-}
 
 
 //list of actors for payment
@@ -194,7 +222,7 @@ var rentalModifications = [{
   'pickupDate': '2015-12-05'
 }];
 
-
+Update();
 console.log(cars);
 console.log(rentals);
 console.log(actors);
