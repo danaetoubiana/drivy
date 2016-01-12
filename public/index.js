@@ -84,16 +84,16 @@ var rentals = [{
 
 
 
-function Update ()
+function UpdatePrice ()
 {
  for ( var i = 0 ; i < rentals.length ; i++)
 	{
 	var day = new Date();
 	var id = rentals[i].carId;
 	var distance = rentals[i].distance;
+  var beginingDate = new Date(rentals[i].pickupDate);
 	var returnDate = new Date (rentals[i].returnDate);
-	var beginingDate = new Date(rentals[i].pickupDate);
-	var priceDay;
+	var priceDay = 0;
 	var priceKm = 0;
 
 			for ( var j =0; j < cars.length ; j++)
@@ -108,6 +108,35 @@ function Update ()
 		rentals[i].price = distance * priceKm + day * priceDay ;
 	}
 }
+
+function Decreasing ()
+{
+  for ( var i = 0 ; i < rentals.length ; i++)
+ 	{
+ 	var day = new Date();
+  var beginingDate = new Date(rentals[i].pickupDate);
+	var returnDate = new Date (rentals[i].returnDate);
+  day = 1+ (returnDate - beginingDate )/(24*3600*1000);
+  var newpriceperday;
+
+    if(day > 1)
+    {
+      newpriceperday = cars[i].pricePerDay*0.90;
+    }
+
+    if(day > 4)
+    {
+      newpriceperday = cars[i].pricePerDay*0.70;
+    }
+
+    if(day > 10)
+    {
+      newpriceperday = cars[i].pricePerDay*0.50;
+    }
+ 	}
+
+}
+
 /* Fonction test avec un forEach
 function getPrice()
 {
@@ -222,7 +251,8 @@ var rentalModifications = [{
   'pickupDate': '2015-12-05'
 }];
 
-Update();
+//UpdatePrice();
+Decreasing();
 console.log(cars);
 console.log(rentals);
 console.log(actors);
