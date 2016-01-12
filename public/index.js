@@ -116,7 +116,7 @@ function Decreasing ()
  	var day = new Date();
   var beginingDate = new Date(rentals[i].pickupDate);
 	var returnDate = new Date (rentals[i].returnDate);
-  day = 1+ (returnDate - beginingDate )/(24*3600*1000);
+  day = 1+(returnDate - beginingDate )/(24*3600*1000);
   var newpriceperday;
 
     if(day > 1)
@@ -251,7 +251,7 @@ var rentalModifications = [{
   'pickupDate': '2015-12-05'
 }];
 
-//UpdatePrice();
+UpdatePrice();
 Decreasing();
 console.log(cars);
 console.log(rentals);
