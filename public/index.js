@@ -82,6 +82,34 @@ var rentals = [{
   }
 }];
 
+function getPrice()
+{
+  rentals.forEach{
+    function (EachRentals){
+      cars.forEach{
+        function(EachCars)
+        {
+          if(EachCars.id == EachRentals.carId){
+            var time = new Date(EachRentals.returnDate) = new Date(EachRentals.pickupDate))/(24*3600*1000));
+
+            var newpriceperday;
+
+            /*if(t > 1)
+            {
+              newpriceperday = EachCars.pricePerDay*0.90;
+            }
+*/
+            var kilometers = EachRentals.distance+EachCars.pricePerKm;
+            EachRentals.price = time * newpriceperday +kilometers;
+          }
+        }
+      }
+    }
+
+}
+}
+
+
 //list of actors for payment
 //useful from exercise 5
 var actors = [{
