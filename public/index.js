@@ -182,61 +182,31 @@ function decrease_rentalPrice()
 }
 
 
-/*function Decreasing ()
+//Exercice 3 : add commission
+
+function give_commission()
 {
-  for ( var i = 0 ; i < rentals.length ; i++)
- 	{
- 	var day = new Date();
-  var beginingDate = new Date(rentals[i].pickupDate);
-	var returnDate = new Date (rentals[i].returnDate);
-  day = 1+(returnDate - beginingDate )/(24*3600*1000);
-  var newpriceperday;
+	for(var i=0; i<rentals.length;i++)
+	{
+		var time_day = getDate(rentals[i].id);
 
-    if(day > 1)
-    {
-      newpriceperday = cars[i].pricePerDay*0.90;
-    }
+		var commission = rentals[i].price * 0.70;
+		alert('The commission for ' + rentals[i].driver.firstName + ' ' + rentals[i].driver.lastName + ' course is ' + commission + ' euros.');
 
-    if(day > 4)
-    {
-      newpriceperday = cars[i].pricePerDay*0.70;
-    }
+		var insurance = commission / 2;
+		alert('The insurrance for ' + rentals[i].driver.firstName + ' ' + rentals[i].driver.lastName + ' course is ' + insurance + ' euros.');
+		rentals[i].commission.insurance = insurance;
 
-    if(day > 10)
-    {
-      newpriceperday = cars[i].pricePerDay*0.50;
-    }
- 	}
+		var roadAssistance = time_day * 1;
+		alert('The road assistance for ' + rentals[i].driver.firstName + ' ' + rentals[i].driver.lastName + ' course is ' + roadAssistance + ' euros.');
+		rentals[i].commission.assistance = roadAssistance;
+
+		var drivy =commission - insurance - roadAssistance;
+		alert('Drivy for ' + rentals[i].driver.firstName + ' ' + rentals[i].driver.lastName + ' course is ' + drivy + ' euros.');
+		rentals[i].commission.drivy = drivy;
+	}
 
 }
-*/
-/* Fonction test avec un forEach
-function getPrice()
-{
-  rentals.forEach{
-    function (EachRentals){
-      cars.forEach{
-        function(EachCars)
-        {
-          if(EachCars.id == EachRentals.carId){
-            var time = new Date(EachRentals.returnDate) = new Date(EachRentals.pickupDate))/(24*3600*1000));
-
-            var newpriceperday;
-
-            /*if(t > 1)
-            {
-              newpriceperday = EachCars.pricePerDay*0.90;
-            }
-
-            var kilometers = EachRentals.distance+EachCars.pricePerKm;
-            EachRentals.price = time * newpriceperday +kilometers;
-          }
-        }
-      }
-    }
-  }
-}
-*/
 
 
 
@@ -325,8 +295,8 @@ var rentalModifications = [{
 }];
 
 UpdatePrice();
-//Decreasing();
 decrease_rentalPrice();
+give_commission();
 console.log(cars);
 console.log(rentals);
 console.log(actors);
