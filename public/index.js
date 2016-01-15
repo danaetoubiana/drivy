@@ -208,6 +208,32 @@ function give_commission()
 
 }
 
+//Exercice 4 : deductible option
+
+function option_deductible()
+{
+	for(var i=0; i<rentals.length;i++)
+	{
+		var time_day = getDate(rentals[i].id);
+		var optionDeductible=4*time_day;
+		var rental_price_deductibleoption;
+
+		if(rentals[i].options.deductibleReduction==true)
+		{
+			rental_price_deductibleoption = rentals[i].price + optionDeductible;
+			alert(rentals[i].driver.firstName + ' ' + rentals[i].driver.lastName + '\n' + ' rental price (deductible option) : ' + rental_price_deductibleoption);
+			rentals[i].price = rental_price_deductibleoption;
+		}
+
+		else{
+			rental_price_deductibleoption=rentals[i].price;
+			alert(rentals[i].driver.firstName + ' ' + rentals[i].driver.lastName + '\n' + ' rental price (without deductible option) : ' + rental_price_deductibleoption);
+		}
+
+	}
+
+}
+
 
 
 //list of actors for payment
@@ -297,6 +323,7 @@ var rentalModifications = [{
 UpdatePrice();
 decrease_rentalPrice();
 give_commission();
+option_deductible();
 console.log(cars);
 console.log(rentals);
 console.log(actors);
