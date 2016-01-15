@@ -82,7 +82,7 @@ var rentals = [{
   }
 }];
 
-
+//Exercice 1
 
 function UpdatePrice ()
 {
@@ -109,7 +109,80 @@ function UpdatePrice ()
 	}
 }
 
-function Decreasing ()
+function getRental( id )
+{
+	for ( var i = 0 ; i < rentals.length ; i++)
+	{
+			if ( id == rentals[i].id)
+			{
+				return rentals[i];
+			}
+	}
+	return ;
+}
+
+function getDate(id)
+{
+	var rental = getRental(id);
+	var returnDate = new Date (rental.returnDate);
+	var pickupDate = new Date(rental.pickupDate);
+	var time = 1+ (returnDate - pickupDate )/(24*3600*1000) ;
+	return time ;
+}
+
+
+function rental_time(time,price)
+{
+	var rentaltime_result=time*price;
+	return rentaltime_result;
+}
+
+function rental_distance(distance, price){
+	var rentaldistance_result=distance*price;
+	return rentaldistance_result;
+}
+
+//Exercice 2
+function decrease_rentalPrice()
+{
+
+	for(var i=0; i<rentals.length;i++){
+
+		var time_day = getDate(rentals[i].id);
+		var rental_discount;
+
+		if(time_day==1)
+		{
+			rental_discount = rentals[i].price;
+			alert(rentals[i].driver.firstName + ' ' + rentals[i].driver.lastName + ' ' + '\nRental Price (no discount) : '  + rental_discount  + ' euros');
+		}
+
+		else if(time_day>1 && time_day<=4)
+		{
+			rental_discount = rentals[i].price*0.90;
+			alert(rentals[i].driver.firstName + ' ' + rentals[i].driver.lastName + ' ' + '\nRental Price Discount (-10%) : ' + rental_discount + ' euros');
+			rentals[i].price= rental_discount;
+		}
+
+		else if(time_day>4 && time_day<=10) {
+
+			rental_discount =rentals[i].price*0.70;
+			alert(rentals[i].driver.firstName + ' ' + rentals[i].driver.lastName + ' ' + '\nRental Price Discount (-30%) : ' + rental_discount + ' euros');
+			rentals[i].price= rental_discount;
+		}
+
+		else if(time_day>10) {
+
+			rental_discount = rentals[i].price*0.50;
+			alert(rentals[i].driver.firstName + ' ' + rentals[i].driver.lastName + ' ' + '\nRental Price Discount(-50%) : ' + rental_discount + ' euros');
+			rentals[i].price= rental_discount;
+		}
+
+	}
+}
+
+
+/*function Decreasing ()
 {
   for ( var i = 0 ; i < rentals.length ; i++)
  	{
@@ -136,7 +209,7 @@ function Decreasing ()
  	}
 
 }
-
+*/
 /* Fonction test avec un forEach
 function getPrice()
 {
@@ -252,8 +325,9 @@ var rentalModifications = [{
 }];
 
 UpdatePrice();
-Decreasing();
+//Decreasing();
+decrease_rentalPrice();
 console.log(cars);
 console.log(rentals);
 console.log(actors);
-//console.log(rentalModifications);
+console.log(rentalModifications);
