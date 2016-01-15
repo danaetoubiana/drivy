@@ -234,7 +234,80 @@ function option_deductible()
 
 }
 
+//Exercice 5 : credit and debit actors
 
+
+function all_payment()
+{
+	for ( var i = 0 ; i < actors.length ; i++)
+	{
+	var price = 0;
+	var commission = 0;
+	var insurance = 0;
+	var assistance = 0 ;
+	var deductibleReduction = true ;
+	var day = getDate(actors[i].rentalId);
+
+		for ( var j = 0 ; j < rentals.length ; j++)
+		{
+			if ( actors[i].rentalId == rentals[j].id )
+			{
+				price = rentals[j].price;
+				var commission = rentals[j].price * 0.70;
+				var insurance = commission / 2;
+				var roadAssistance = day * 1;
+				var drivy = commission - insurance - roadAssistance;
+
+			for ( var k = 0 ; k < actors[i].payment.length; k++)
+			{
+				switch(actors[i].payment[k].who)
+
+				{
+					case 'driver' :
+					actors[i].payment[k].amount=price;
+					alert('Driver Amount : ' + actors[i].payment[k].amount);
+					break;
+
+					case 'owner' :
+					actors[i].payment[k].amount=price-commission;
+					alert('Owner Amount : ' + actors[i].payment[k].amount);
+					break;
+
+					case 'insurance' :
+					actors[i].payment[k].amount=insurance;
+					alert('Insurance Amount : ' + actors[i].payment[k].amount);
+					break;
+
+					case 'assistance' :
+					actors[i].payment[k].amount=roadAssistance;
+					alert('Assistance Amount : ' + actors[i].payment[k].amount);
+					break;
+
+					case 'drivy' :
+					if(rentals[i].options.deductibleReduction==true)
+					{
+						option_deductible=4*day;
+						actors[i].payment[k].amount=drivy + option_deductible;
+						alert('Drivy Amount : ' + actors[i].payment[k].amount);
+						break;
+					}
+
+					else {
+						option_deductible=0;
+						actors[i].payment[k].amount=drivy + option_deductible;
+						alert('Drivy Amount : ' + actors[i].payment[k].amount);
+					break;
+					}
+
+
+				}
+			}
+			}
+		}
+
+	}
+
+}
 
 //list of actors for payment
 //useful from exercise 5
@@ -324,6 +397,7 @@ UpdatePrice();
 decrease_rentalPrice();
 give_commission();
 option_deductible();
+all_payment();
 console.log(cars);
 console.log(rentals);
 console.log(actors);
